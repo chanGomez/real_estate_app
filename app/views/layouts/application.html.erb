@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= content_for(:title) || "Real Estate App" %></title>
+
+<head>
+    <title><%= content_for(:title) || "Villow" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -21,11 +22,38 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
+</head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
+<body>
+    <main class="prose mx-auto  px-5">
+
+        <nav class="flex justify-between">
+            <div class="flex items-center gap-2">
+                <%= link_to "Villow", root_path, class: "text-xl font-bold no-underline"%>
+                <ul class="list-none">
+                    <li><%= link_to "Home", root_path%></li>
+                </ul>
+            </div>
+            <ul class="list-none flex item-center gap-2">
+                <%if user_signed_in?%>
+                <li>
+                    <%= link_to "Profile", edit_user_registration_path%>
+                </li>
+                <li>
+                    <%= button_to "Logout", destroy_user_session_path, method: :delete%>
+                </li>
+                <%else%>
+                <li>
+                    <%= link_to "Login", new_user_session_path%>
+                </li>
+                <li>
+                    <%= link_to "Sign Up", new_user_registration_path%>
+                </li>
+                <%end%>
+            </ul>
+        </nav>
+        <%= yield %>
     </main>
-  </body>
+</body>
+
 </html>

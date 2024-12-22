@@ -1,0 +1,8 @@
+<%= link_to listing, id: dom_id(listing), class: "p-4 block no-underline rounded hover:bg-gray-100" do %>
+<div>
+    <%= listing.location%>
+</div>
+<div class="text-sm text-gray-500 font-normal">
+    <%= listing.price %>
+</div>
+<%end%>

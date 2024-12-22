@@ -1,0 +1,36 @@
+<%= form_with model: listing do |form| %>
+<%if form.object.errors.any?%>
+<% form.object.errors.full_messages.each do |message| %>
+<div>
+    <%=message%>
+</div>
+<%end%>
+<%end%>
+
+
+<div class="field">
+    <%= form.label :url%>
+    <%= form.text_field :url%>
+</div>
+
+<div class="field">
+    <%= form.label :username%>
+    <%= form.text_field :username%>
+</div>
+
+<div class="field">
+    <%= form.label :listing%>
+    <%= form.text_field :listing%>
+</div>
+
+<div class="field">
+    <%= form.submit%>
+    <%
+=begin%>
+    <%= button_tag "Delete", form: "delete_listing" if form.object.persisted? && current_user_listing.deletable?%>
+    <%
+=end%>
+</div>
+<%end%>
+
+<%=form_with model: listing, method: :delete, id:"delete_listing", data: {turbo_confirm: "Are you sure?"} %>
